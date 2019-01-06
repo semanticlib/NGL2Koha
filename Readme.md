@@ -14,7 +14,7 @@ These scripts are slightly dumbed-down version from a real data migration projec
 
 These are command-line scripts, not plug-n-play stuff. Some familiarity with Linux (like Ubuntu) is mandatory. We assume no responsibility if you break something!
 
-### Other Assumptions & Disclaimers
+**Other Assumptions & Disclaimers**
 
 - The steps mentioned below assumes you are running some version of Ubuntu LTS. Commands can be altered based on the platform.
 - The scripts provided here are as generic as could be prepared. Implementation specific data cleaning and fields mapping are removed for the sake of simplicity.
@@ -22,11 +22,12 @@ These are command-line scripts, not plug-n-play stuff. Some familiarity with Lin
 
 ## Installation / Setup
 
-### Clone this repository
+#### Clone this repository
+```
+git clone https://github.com/semanticlib/NGL2Koha.git`
+```
 
-`git clone https://github.com/semanticlib/NGL2Koha.git`
-
-### Install dependencies
+#### Install dependencies
 Installation of Koha will take care of most the Perl dependencies.
 
 Other Perl module dependencies are:
@@ -36,11 +37,13 @@ Other Perl module dependencies are:
 
 These may be installed either from [CPAN](https://metacpan.org) or from OS repositories.
 
-#### On Ubuntu/Debian, following should work:
+**On Ubuntu/Debian, following should work:**
 
-`sudo apt-get install libdbd-pg-perl libmarc-file-marcmaker-perl libyaml-libyaml-perl`
+```
+sudo apt-get install libdbd-pg-perl libmarc-file-marcmaker-perl libyaml-libyaml-perl
+```
 
-### Configuration
+#### Configuration
 
 Edit the `config.yml` with appropriate details.
 
@@ -48,12 +51,12 @@ Edit the `config.yml` with appropriate details.
 
 The migrations steps mentioned below must be be tested on a test/staging instance of both Koha and NGL, before attempting this on production.
 
-### Prepare NGL Staging
+#### Prepare NGL Staging
 The scripts provided here does not do any changes in the NGL database. Even then it is advisable to run these against a staging instance of NGL database copy. Mostly for security reasons. Final migration can be done on the production DB.
 
 Configure the NGL database credentials in the config.yml.
 
-### Prepare Koha Staging
+#### Prepare Koha Staging
 * Create a new instance of Koha, say 'demo' for testing the data migration.
 * Configure all the required parameters:
     - Create the branches.
@@ -70,7 +73,9 @@ Configure the NGL database credentials in the config.yml.
 
 #### Prepare MARC data
 
-`perl prepare_marc.pl data.mrc`
+```
+perl prepare_marc.pl data.mrc
+```
 
 Test the data with any MARC viewer, such yaz-marcdump or MARCEdit. 
 
@@ -110,11 +115,15 @@ Follow the [Koha Wiki](https://wiki.koha-community.org/wiki/Main_Page) for detai
 
 #### Re-build Koha Index
 	
-`sudo koha-rebuild-zebra -f -b -v demo`
+```
+sudo koha-rebuild-zebra -f -b -v demo
+```
 
 Re-start the Koha indexer now if required:
 
-`sudo koha-indexer --start demo`
+```
+sudo koha-indexer --start demo
+```
 
 ## Migrate Patrons Data
 
@@ -124,7 +133,9 @@ Update the `config.yml` with correct database mapping before running the scripts
 
 Read the instructions in config.yml before running this script:
 
-`perl params_migrate.pl`
+```
+perl params_migrate.pl
+```
 
 Use this only if you need to migrate additional patron attributes.
 
@@ -144,6 +155,8 @@ Note: This generates random password for each patron. If password field is avail
 
 ## Migrate Circulation Transactions
 
-`perl circ_migrate.pl`
+```
+perl circ_migrate.pl
+```
 
-If something doesn't work, report them in the issues.
+If something doesn't work, please report them in the issues.
