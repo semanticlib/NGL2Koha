@@ -1,0 +1,66 @@
+# NewGenLib Postgres DB settings
+dbhost: localhost
+dbname: newgenlibdb
+dbuser: newgenlibuser
+dbpass: newgenlibpass
+
+# Koha DB settings
+kohadb_host: localhost
+kohadb_name: koha_demo
+kohadb_user: root
+kohadb_pass: password
+
+# Default data settings
+classification: ddc
+default_item_type: BK
+library_branch: MAIN
+default_stack: GEN
+
+# The tags that will be ignored
+delete_marc_tags: ['007', '880', '901', '906']
+
+# The tags for which invalid MARC indicators will be removed
+delete_indicators: ['020', '082', '250', '260', '300', '500']
+
+# NGLIB material type to Koha item type mapping, add new line for each mapping
+#   [default_item_type need not be mapped]
+item_type_map:
+    1: BK
+    2: REF
+    3: SER
+
+# NGLIB location id to Koha shelving stack mapping
+# Add new line for each mapping
+shelving_stack:
+    1: GEN
+    2: REF
+    3: ACQ
+
+## Circulation Data Mapping
+# NGLIB patron category mapping
+# Add new line for each mapping
+default_patron_type: ST
+patron_type_map:
+    1: F
+    2: ST
+    3: OT
+
+# Parameters migration to Koha authorized values, for mapping Patron Attributes
+# Setting must be in the following format:
+#   AUTHORIZED_VALUE:       [Koha authorized value key]
+#       table_name:         [NGL table name]
+#       id_field:           [NGL id column name]
+#       value_field:        [NGL value column name]
+# Following example settings will migrate department and courses into 
+#   'DEPT' and 'COURSE' authorized values
+#   Note: The 'DEPT' and 'COURSE' authorized values key must be added in Koha 
+#         before running the params_migrate.pl
+parameters:
+    DEPT:
+        table_name: dept
+        id_field: dept_id
+        value_field: dept_name
+    COURSE:
+        table_name: course
+        id_field: course_id
+        value_field: course_name
