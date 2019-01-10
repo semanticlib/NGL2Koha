@@ -28,7 +28,7 @@ git clone https://github.com/semanticlib/NGL2Koha.git
 ```
 
 #### Install dependencies
-Installation of Koha will take care of most the Perl dependencies.
+Installation of Koha will take care of most of the Perl dependencies.
 
 Other Perl module dependencies are:
 * DBD::Pg
@@ -49,7 +49,7 @@ Edit the `config.yml` with appropriate details.
 
 ## Preparation
 
-The migrations steps mentioned below must be be tested on a test/staging instance of both Koha and NGL, before attempting this on production.
+The migration steps mentioned below must be be tested on a test/staging instance of both Koha and NGL, before attempting this on production.
 
 #### Prepare NGL Staging
 The scripts provided here does not do any changes in the NGL database. Even then it is advisable to run these against a staging instance of NGL database copy. Mostly for security reasons. Final migration can be done using the production database.
@@ -93,10 +93,13 @@ export LIMIT=10
 perl prepare_marc.pl data.mrc
 ```
 
+The above command will convert only first 10 records.
+
+Both the environment variables can be reset by assigning them to zero. e.g. `export LIMIT=0`
 
 #### Import MARC data
 
-For small datasets, it is often easier to import MARC using the Koha Tools menu. For larger datasets, the command-line tool is recommended.
+For small datasets, it is often easier to import MARC records using the [Koha Tools](https://koha-community.org/manual/18.11/en/html/tools.html#stage-marc-records-for-import). For larger datasets, the command-line tool [`bulkmarcimport.pl`](https://perldoc.koha-community.org/misc/migration_tools/bulkmarcimport.html) is recommended.
 
 It might be good idea to stop Koha indexer before importing a big dataset.
 
@@ -111,8 +114,6 @@ sudo koha-shell demo
 perl /usr/share/koha/bin/migration_tools/bulkmarcimport.pl -fk -framework FA -commit 1000 -file data.mrc
 exit
 ```
-
-Follow the [Koha Wiki](https://wiki.koha-community.org/wiki/Main_Page) for detailed documentation on the MARC import options.
 
 #### Re-build Koha Index
 	
