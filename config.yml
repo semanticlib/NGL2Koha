@@ -12,7 +12,6 @@ kohadb_pass: password
 
 # Default data settings
 classification: ddc
-default_item_type: BK
 library_branch: MAIN
 default_stack: GEN
 
@@ -23,7 +22,10 @@ delete_marc_tags: ['007', '880', '901', '906']
 delete_indicators: ['020', '082', '250', '260', '300', '500']
 
 # NGLIB material type to Koha item type mapping, add new line for each mapping
-#   [default_item_type need not be mapped]
+#   Format: 
+#     NGL_Material_Type_ID: Koha_Item_Type
+# [NGL material types having default_item_type need not be mapped, it will be set to default]
+default_item_type: BK
 item_type_map:
     1: BK
     2: REF
@@ -31,6 +33,8 @@ item_type_map:
 
 # NGLIB location id to Koha shelving stack mapping
 # Add new line for each mapping
+#   Format: 
+#     NGL_Stack_ID: Koha_Stack_ID
 shelving_stack:
     1: GEN
     2: REF
@@ -39,6 +43,9 @@ shelving_stack:
 ## Circulation Data Mapping
 # NGLIB patron category mapping
 # Add new line for each mapping
+#   Format: 
+#     NGL_Patron_Type_ID: Koha_Patron_Type
+# [NGL patrons for default_patron_type need not be mapped, it will be set to default]
 default_patron_type: ST
 patron_type_map:
     1: F
