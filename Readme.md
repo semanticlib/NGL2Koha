@@ -77,7 +77,7 @@ Configure the NGL database credentials in the `config.yml`.
 perl prepare_marc.pl data.mrc
 ```
 
-Test the data with any MARC viewer, such yaz-marcdump or MARCEdit. 
+Test the data with any MARC viewer, such [`yaz-marcdump`](https://software.indexdata.com/yaz/doc/yaz-marcdump.html) or [MARCEdit](https://marcedit.reeset.net/). 
 
 Alternatively, enable DEBUG mode to view format MARC records with these commands:
 
